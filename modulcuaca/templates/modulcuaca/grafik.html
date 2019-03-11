@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- required css style file for C3.js -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<!-- container element in which we will create the chart -->
+<div id="chart1"></div>
+<div id="chart2"></div>
+<div id="chart3"></div>
+
+<!-- required javascript libraries-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<!-- javascript block to render and update the chart-->
+
+<script type="text/javascript">
+$(document).ready(function () {
+    var gaugeData = {'data': 0.0}
+  
+    // create a chart and set options
+    // note that we bind the chart to the element with id equal to chart1 via the c3.js API
+    var chart = c3.generate({
+        bindto: '#chart1',
+        data: {
+            json: gaugeData,
+            type: 'gauge',
+        },
+        gauge: {
+            label:{
+                //returning the value here and not the ratio
+                format: function(value, ratio){ return value;}
+            },
+            min: 0,
+            max: 100,
+            width: 15,
+            units: 'Celcius' //this is only the text for the label
+        },
+        color: {
+            pattern: ['#60B044', '#F6C600', '#F97600', '#FF0000' ], // the three color levels for the percentage values.
+            threshold: {
+    //            unit: 'value', // percentage is default
+    //            max: 200, // 100 is default
+                values: [30, 60, 90, 100]
+            }
+        },
+        size: {
+            height: 180
+        }
+    });
+
+    var chart2 = c3.generate({
+        bindto: '#chart2',
+        data: {
+            json: gaugeData,
+            type: 'gauge',
+        },
+        gauge: {
+            label:{
+                //returning the value here and not the ratio
+                format: function(value, ratio){ return value;}
+            },
+            min: 0,
+            max: 1500,
+            width: 15,
+            units: 'Kelembaban' //this is only the text for the label
+        },
+        color: {
+            pattern: ['#60B044', '#F6C600', '#F97600', '#FF0000' ], // the three color levels for the percentage values.
+            threshold: {
+    //            unit: 'value', // percentage is default
+    //            max: 200, // 100 is default
+                values: [30, 60, 90, 100]
+            }
+        },
+        size: {
+            height: 180
+        }
+    });
+
+    var chart3 = c3.generate({
+        bindto: '#chart3',
+        data: {
+            json: gaugeData,
+            type: 'gauge',
+        },
+        gauge: {
+            label:{
+                //returning the value here and not the ratio
+                format: function(value, ratio){ return value;}
+            },
+            min: 0,
+            max: 1000,
+            width: 15,
+            units: 'Tekanan Udara' //this is only the text for the label
+        },
+        color: {
+            pattern: ['#60B044', '#F6C600', '#F97600', '#FF0000' ], // the three color levels for the percentage values.
+            threshold: {
+    //            unit: 'value', // percentage is default
+    //            max: 200, // 100 is default
+                values: [30, 60, 90, 100]
+            }
+        },
+        size: {
+            height: 180
+        }
+    });
+    
+    // this function will update every 2000 milliseconds
+    // and create a new value between 0 and 100
+    // setInterval(function () {
+        
+    //     $.getJSON('api-suhu/', function (json) {
+    //         console.log(json[0].temp_value)
+        
+    //     // create a random value between 0 and 100, rounded to 2 digits
+    //     var newValue = Math.floor(100 * Math.random());
+        
+    //     // create a data array holding the random value
+    //     var newData = {'data': json[0].temp_value };
+        
+    //     // tell the chart to load the new data
+    //     chart.load({
+    //       json: newData
+    //     });
+    //     });
+    // }, 100);
+
+    $.getJSON('api-suhu/', function (json) {
+        console.log(json[0].temp_value)
+        for (var i = 0; i < json.length; i++) {
+    
+            // create a random value between 0 and 100, rounded to 2 digits
+            var newValue = Math.floor(100 * Math.random());
+            
+            // create a data array holding the random value
+            var newData = {'data': json[i].temp_value };
+            
+            // tell the chart to load the new data
+            chart.load({
+              json: newData
+            });
+        }
+    });
+
+    $.getJSON('api-kelembaban/', function (hum) {
+        console.log(hum[0].hum_value)
+        for (var i = 0; i < hum.length; i++) {
+    
+            // create a random value between 0 and 100, rounded to 2 digits
+            var newValue = Math.floor(100 * Math.random());
+            
+            // create a data array holding the random value
+            var newData = {'data': hum[i].hum_value };
+            
+            // tell the chart to load the new data
+            chart2.load({
+              json: newData
+            });
+        }
+    });
+
+    $.getJSON('api-tekananudara/', function (press) {
+        console.log(press[0].press_value)
+        for (var i = 0; i < press.length; i++) {
+    
+            // create a random value between 0 and 100, rounded to 2 digits
+            var newValue = Math.floor(100 * Math.random());
+            
+            // create a data array holding the random value
+            var newData = {'data': press[i].press_value };
+            
+            // tell the chart to load the new data
+            chart3.load({
+              json: newData
+            });
+        }
+    });          
+
+});
+</script>
+</body>
+</html>
