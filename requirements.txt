@@ -1,0 +1,9 @@
+-f /usr/share/pip-wheels
+Django==2.2
+et-xmlfile==1.0.1
+ez-setup==0.9
+jdcal==1.4.1
+mysqlclient==1.4.2.post1
+openpyxl==2.6.2
+pytz==2019.1
+sqlparse==0.3.0
