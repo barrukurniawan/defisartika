@@ -19,9 +19,15 @@ from modulcuaca import views as dashboard
 
 urlpatterns = [
     path('data-cuaca/<path:api_key>/<path:temp_value>/<path:hum_value>/<path:press_value>', dashboard.data_cuaca, name='data-cuaca'),
+    path('api-summary/', dashboard.api_summary, name='api-summary'),
     path('api-suhu/', dashboard.api_suhu, name='api-suhu'),
     path('api-temp/', dashboard.api_temp, name='api-temp'),
     path('api-kelembaban/', dashboard.api_kelembaban, name='api-kelembaban'),
     path('api-tekananudara/', dashboard.api_tekananudara, name='api-tekananudara'),
     path('grafik', dashboard.web_grafik, name='grafik'),
+    path('home', dashboard.web_home, name='home'),
+    path('', dashboard.web_raspi, name='raspi'),
+    path('excelsuhu/', dashboard.export_suhu_to_xlsx, name='excelSuhu'),
+    path('excelkelembaban/', dashboard.export_kelembaban_to_xlsx, name='excelKelembaban'),
+    path('exceltekananudara/', dashboard.export_tekananudara_to_xlsx, name='excelTekananudara'),
 ]

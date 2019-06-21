@@ -25,7 +25,7 @@ SECRET_KEY = 'goy(_+@4_z^k8)k^k(!d$u72a5$f&#og8alu97jkp_f!y=0w#i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['defisartikah.pythonanywhere.com']
 
 
 # Application definition
@@ -92,10 +92,10 @@ EMAIL_HOST_PASSWORD = 'barrusman60'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cuaca_tugasakhir',
-        'HOST': '127.0.0.1',
-        'USER':'root',
-        'PASSWORD': '',
+        'NAME': 'defisartikah$default',
+        'HOST': 'defisartikah.mysql.pythonanywhere-services.com',
+        'USER':'defisartikah',
+        'PASSWORD': 'teknikinstrumentasi',
     }
 }
 
